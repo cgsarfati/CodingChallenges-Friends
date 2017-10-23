@@ -127,6 +127,13 @@ class FriendGraph(object):
     def are_connected(self, name1, name2):
         """Is this name1 friends with name2?"""
 
+        # need to keep track of seen nodes (to avoid infinite loop)
+        # use recursion = depth-first search; probably good idea to have
+            # fn inside to keep code tidy
+        # use .adjacent to get access to node's direct friends (to loop over)
+
+        def _are_connected(node, name2, seen):
+
 
 if __name__ == '__main__':
     import doctest
