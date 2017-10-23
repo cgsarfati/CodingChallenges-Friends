@@ -134,6 +134,29 @@ class FriendGraph(object):
 
         def _are_connected(node, name2, seen):
 
+            # BASE: connected
+            if node.name == name2:
+                return True
+
+            # keep track that we've visited this node (to avoid infinite loop)
+            seen.add(node)
+
+            # recursively check all friends of node
+            for n in node.adjacent:
+                # skip seen
+                if n in seen:
+                    continue
+
+                # if not seen, recurse
+                if _are_connected(n, name2, seen):
+                    return True
+
+            # BASE: not connected
+            return False
+
+        # start recursion with initial values ()
+        return _are_connected(self.nodes[name1], name2, set())
+
 
 if __name__ == '__main__':
     import doctest
